@@ -79,7 +79,7 @@ isValid = false;
 if (isValid) {
 // Create WhatsApp message
 const whatsappMessage = `Hi Razik! My name is ${name}. Email: ${email}. Message: ${message}`;
-const whatsappUrl = `https://wa.me/919526167587?text=${encodeURIComponent(whatsappMessage)}`;
+const whatsappUrl = `https://wa.me/9526167587?text=${encodeURIComponent(whatsappMessage)}`;
 
 // Open WhatsApp
 window.open(whatsappUrl, '_blank');
@@ -100,11 +100,11 @@ errorElement.style.display = 'block';
 }
 
 // Navbar background on scroll
-window.addEventListener('scroll', function() {
-const nav = document.querySelector('nav');
-if (window.scrollY > 100) {
-nav.style.background = 'rgba(255, 255, 255, 0.98)';
-} else {
-nav.style.background = 'rgba(255, 255, 255, 0.95)';
-}
-});
+// window.addEventListener('scroll', function() {
+// const nav = document.querySelector('nav');
+// if (window.scrollY > 100) {
+//  nav.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+// } else {
+//    nav.style.background = 'transparent'; 
+// }
+// });
