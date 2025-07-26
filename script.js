@@ -99,6 +99,30 @@ errorElement.textContent = errorMessage;
 errorElement.style.display = 'block';
 }
 
+  const jobTitle = document.getElementById("job-title");
+  const titles = ["Web Developer", "Backend Developer"];
+  let index = 0;
+
+  setInterval(() => {
+    // Fade out
+    jobTitle.classList.add("fade-out");
+
+    setTimeout(() => {
+      // Change text and fade in
+      index = (index + 1) % titles.length;
+      jobTitle.textContent = titles[index];
+      jobTitle.classList.remove("fade-out");
+      jobTitle.classList.add("fade-in");
+
+      // Clean up
+      setTimeout(() => {
+        jobTitle.classList.remove("fade-in");
+      }, 500);
+    }, 500);
+  }, 4000); // Every 4 seconds
+
+
+
 // Navbar background on scroll
 // window.addEventListener('scroll', function() {
 // const nav = document.querySelector('nav');
