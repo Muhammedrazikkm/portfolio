@@ -132,3 +132,34 @@ errorElement.style.display = 'block';
 //    nav.style.background = 'transparent'; 
 // }
 // });
+
+// Mobile Menu Toggle
+const mobileMenu = document.getElementById('mobile-menu');
+const navLinks = document.querySelector('.nav-links');
+
+if (mobileMenu) {
+  mobileMenu.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    const icon = mobileMenu.querySelector('i');
+    icon.classList.toggle('fa-bars');
+    icon.classList.toggle('fa-times');
+  });
+}
+
+// Close mobile menu when clicking a link
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    if (navLinks.classList.contains('active')) {
+      navLinks.classList.remove('active');
+      const icon = mobileMenu.querySelector('i');
+      icon.classList.remove('fa-times');
+      icon.classList.add('fa-bars');
+    }
+  });
+});
+
+// Set dynamic copyright year
+const currentYearElement = document.getElementById('current-year');
+if (currentYearElement) {
+  currentYearElement.textContent = new Date().getFullYear();
+}

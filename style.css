@@ -82,6 +82,21 @@ nav {
   font-weight: bold;
   color: #00d2ff; /* Cyan futuristic */
   text-shadow: 0 0 8px rgba(0, 210, 255, 0.6);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.logo:hover {
+  text-shadow: 0 0 15px rgba(0, 210, 255, 0.9);
+  transform: scale(1.05);
+}
+
+/* Mobile Menu Toggle */
+.menu-toggle {
+  display: none;
+  color: #00d2ff;
+  font-size: 1.8rem;
+  cursor: pointer;
 }
 
 /* Links */
@@ -352,7 +367,7 @@ border-radius: 2px;
   letter-spacing: 1px;
 }
 
-/* 💎 Glassmorphism-style experience item */
+/*  Glassmorphism-style experience item */
 .experience-item {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -833,18 +848,29 @@ transform: translateY(0);
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  nav,
-  .navbar,
-  .nav,
-  header,
-  .nav-links {
-    display: none !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
-    z-index: -1 !important;
-    position: absolute !important;
-    pointer-events: none !important;
+  .menu-toggle {
+    display: block;
   }
+
+  .nav-links {
+    position: fixed;
+    top: 70px;
+    left: -100%;
+    width: 100%;
+    height: calc(100vh - 70px);
+    background: rgba(15, 32, 39, 0.95);
+    backdrop-filter: blur(15px);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: left 0.3s ease;
+    gap: 2rem;
+  }
+
+  .nav-links.active {
+    left: 0;
+  }
+
   /* Hero Section */
   .hero-content h1 {
     font-size: 2rem;
@@ -907,6 +933,7 @@ transform: translateY(0);
     margin-bottom: 2rem;
   }
 
+
   /* Certificates */
   .certificates-grid {
     display: grid;
@@ -938,5 +965,20 @@ transform: translateY(0);
   footer p {
     text-align: center;
     font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .hero-content h1 {
+    font-size: 1.8rem;
+  }
+  .section-title {
+    font-size: 1.5rem;
+  }
+  .project-card, .experience-item, .education-item, .certificate-card {
+    padding: 1.2rem;
   }
 }
