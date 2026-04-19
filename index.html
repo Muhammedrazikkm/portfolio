@@ -11,6 +11,12 @@
 </head>
 
 <body>
+    <!-- Custom Cursor Trail -->
+    <div class="cursor-trail" id="cursorTrail"></div>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+
     <!-- Loading Screen -->
   <div class="loading" id="loading">
     <div class="spinner"></div>
@@ -27,6 +33,7 @@
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
+                <li><a href="#terminal">Terminal</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#projects">Projects</a></li>
@@ -55,6 +62,31 @@
             <h2 class="section-title">About Me</h2>
             <div class="about-content">
                 <p>I am a passionate Web Developer with strong expertise in building scalable and high-performance web applications using Node.js, Express.js, MySQL, and MongoDB. I love crafting dynamic, responsive user interfaces with React, HTML, and JavaScript. My background includes deep experience in RESTful API development, database design, secure authentication, and performance optimization. Beyond writing code, I am highly skilled in managing Linux-based servers via SSH, handling seamless deployments, and configuring domains and subdomains for robust production environments. I am truly committed to delivering efficient, secure, and user-friendly systems from the ground up.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Terminal Section -->
+    <section id="terminal" class="terminal-section section">
+        <div class="container">
+            <h2 class="section-title">Developer Terminal</h2>
+            <div class="terminal-container">
+                <div class="terminal-header">
+                    <div class="terminal-button red"></div>
+                    <div class="terminal-button yellow"></div>
+                    <div class="terminal-button green"></div>
+                    <div class="terminal-title">razik@ubuntu:~</div>
+                </div>
+                <div class="terminal-body" id="terminalBody">
+                    <div id="terminalOutput">
+                        <p class="terminal-text">Welcome to RazikOS v1.0.0</p>
+                        <p class="terminal-text">Type <span class="highlight">help</span> to see available commands.</p>
+                    </div>
+                    <div class="terminal-input-container">
+                        <span class="terminal-prompt"><span class="user">razik@ubuntu</span>:<span class="path">~</span>$</span>
+                        <input type="text" id="terminalInput" autocomplete="off" spellcheck="false">
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -118,10 +150,12 @@
                     <div class="experience-period">Jan '25 — Present</div>
                 </div>
                 <div class="experience-description">
-                    <p>➤ <strong>Glider Global Learning Academy:</strong> Collaborated on building an inclusive online language learning platform, developing dynamic RESTful APIs and integrating MySQL to ensure a scalable architecture and a seamless user experience across all age groups.</p>
-                    <p>➤ <strong>Kairali Restaurant:</strong> Engineered a comprehensive full-stack system featuring table reservations, online and QR-based ordering, and feedback management. I focused on designing secure APIs and optimizing database workflows to heavily streamline their daily operations.</p>
-                    <p>➤ <strong>Supermarket Management System:</strong> Upgraded inventory control by implementing batch-wise product management and creating dynamic product pages with interactive image zoom, backed by highly optimized database performance.</p>
-                    <p>➤ <strong>Server & Deployment Management:</strong> Independently managed remote Linux servers via SSH, handling environment configurations, subdomains, and production builds to guarantee stable and secure application hosting.</p>
+                    <ul>
+                        <li><strong>Glider Global Learning Academy:</strong> Collaborated on building an inclusive online language learning platform, developing dynamic RESTful APIs and integrating MySQL to ensure a scalable architecture and a seamless user experience across all age groups.</li>
+                        <li><strong>Kairali Restaurant:</strong> Engineered a comprehensive full-stack system featuring table reservations, online and QR-based ordering, and feedback management. I focused on designing secure APIs and optimizing database workflows to heavily streamline their daily operations.</li>
+                        <li><strong>Supermarket Management System:</strong> Upgraded inventory control by implementing batch-wise product management and creating dynamic product pages with interactive image zoom, backed by highly optimized database performance.</li>
+                        <li><strong>Server & Deployment Management:</strong> Independently managed remote Linux servers via SSH, handling environment configurations, subdomains, and production builds to guarantee stable and secure application hosting.</li>
+                    </ul>
                 </div>
             </div>
 
@@ -134,8 +168,10 @@
                     <div class="experience-period">May '24 — Dec '24</div>
                 </div>
                 <div class="experience-description">
-                    <p>➤ Built and maintained scalable backend solutions using Node.js and Express.js, designing robust RESTful APIs and connecting them with dynamic HTML, CSS, and JavaScript frontends.</p>
-                    <p>➤ Actively optimized MySQL database interactions and championed the use of Git for version control, ensuring high code quality, efficient team collaboration, and streamlined development workflows.</p>
+                    <ul>
+                        <li>Built and maintained scalable backend solutions using Node.js and Express.js, designing robust RESTful APIs and connecting them with dynamic HTML, CSS, and JavaScript frontends.</li>
+                        <li>Actively optimized MySQL database interactions and championed the use of Git for version control, ensuring high code quality, efficient team collaboration, and streamlined development workflows.</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -264,19 +300,10 @@
             <div class="certificates-grid">
                 <div class="certificate-card">
                     <div class="certificate-icon"><i class="fas fa-certificate"></i></div>
-                    <h3>Python For Beginners Course In Depth</h3>
-                    <p><strong>Given by:</strong> Udemy</p>
-                    <p><strong>Period:</strong> 2023</p>
-                       <a href="https://www.udemy.com/certificate/UC-b502844a-fbcd-4145-bc6b-2f3f21d68693/" class="certificate-link" target="_blank" rel="noopener noreferrer">
-          View 
-        </a>
-                </div>
-                <div class="certificate-card">
-                    <div class="certificate-icon"><i class="fas fa-certificate"></i></div>
-                    <h3>Python Django - Angular- Full Stack Web Development Expert</h3>
-                    <p><strong>Given by:</strong> National Council for Technology and Training</p>
-                    <p><strong>Period:</strong> 2024</p>
-                      <a href="https://drive.google.com/file/d/1m9-t1YpGip9LCX4oud-E6TnTCoHgZShF/view?usp=sharing" class="certificate-link" target="_blank" rel="noopener noreferrer">
+                    <h3>Foundations: Data, Data, Everywhere</h3>
+                    <p><strong>Given by:</strong> Google</p>
+                    <p><strong>Period:</strong> March 2026</p>
+                    <a href="https://www.coursera.org/account/accomplishments/records/3ICF0HIDB1A4" class="certificate-link" target="_blank" rel="noopener noreferrer">
           View 
         </a>
                 </div>
@@ -298,6 +325,24 @@
           View 
         </a>
                 </div>
+                <div class="certificate-card">
+                    <div class="certificate-icon"><i class="fas fa-certificate"></i></div>
+                    <h3>Python Django - Angular- Full Stack Web Development Expert</h3>
+                    <p><strong>Given by:</strong> National Council for Technology and Training</p>
+                    <p><strong>Period:</strong> 2024</p>
+                      <a href="https://drive.google.com/file/d/1m9-t1YpGip9LCX4oud-E6TnTCoHgZShF/view?usp=sharing" class="certificate-link" target="_blank" rel="noopener noreferrer">
+          View 
+        </a>
+                </div>
+                <div class="certificate-card">
+                    <div class="certificate-icon"><i class="fas fa-certificate"></i></div>
+                    <h3>Python For Beginners Course In Depth</h3>
+                    <p><strong>Given by:</strong> Udemy</p>
+                    <p><strong>Period:</strong> 2023</p>
+                       <a href="https://www.udemy.com/certificate/UC-b502844a-fbcd-4145-bc6b-2f3f21d68693/" class="certificate-link" target="_blank" rel="noopener noreferrer">
+          View 
+        </a>
+                </div>
             </div>
         </div>
     </section>
@@ -306,6 +351,20 @@
     <section id="contact" class="section contact">
         <div class="container">
             <h2 class="section-title">Contact Me</h2>
+            
+            <div class="contact-info-blocks">
+                <div class="contact-info-item" onclick="copyToClipboard('muhdrazikkm@gmail.com', this)">
+                    <i class="fas fa-envelope"></i>
+                    <span class="info-text">muhdrazikkm@gmail.com</span>
+                    <span class="copy-tooltip">Click to copy</span>
+                </div>
+                <div class="contact-info-item" onclick="copyToClipboard('+97455110479', this)">
+                    <i class="fas fa-phone-alt"></i>
+                    <span class="info-text">+974 55110479</span>
+                    <span class="copy-tooltip">Click to copy</span>
+                </div>
+            </div>
+
             <form class="contact-form" id="contactForm">
                 <div class="form-group">
                     <label for="name">Name</label>
@@ -327,6 +386,11 @@
         </div>
     </section>
 
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" id="backToTop" title="Go to top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
     <!-- Footer -->
 <footer>
   <div class="container">
@@ -335,7 +399,7 @@
       <a href="https://www.linkedin.com/in/muhammed-razik-b5b266245/" target="_blank" rel="noopener noreferrer" title="LinkedIn">
         <i class="fab fa-linkedin"></i>
       </a>
-      <a href="mailto:your.email@muhdrazikkm@gmail.com" title="Gmail">
+      <a href="mailto:muhdrazikkm@gmail.com" title="Gmail">
         <i class="fas fa-envelope"></i>
       </a>
       <a href="http://github.com/Muhammedrazikkm" target="_blank" rel="noopener noreferrer" title="GitHub">

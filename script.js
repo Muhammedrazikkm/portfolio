@@ -6,6 +6,16 @@ loading.classList.add('hidden');
 }, 2000);
 });
 
+// Scroll Progress Bar
+window.addEventListener('scroll', () => {
+  const scrollProgressBar = document.getElementById('scrollProgressBar');
+  const totalScrollHeight = document.body.scrollHeight - window.innerHeight;
+  const currentScrollPosition = window.scrollY;
+  
+  const scrollPercentage = (currentScrollPosition / totalScrollHeight) * 100;
+  scrollProgressBar.style.width = scrollPercentage + '%';
+});
+
 // Smooth Scrolling
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 anchor.addEventListener('click', function (e) {
@@ -162,4 +172,106 @@ document.querySelectorAll('.nav-links a').forEach(link => {
 const currentYearElement = document.getElementById('current-year');
 if (currentYearElement) {
   currentYearElement.textContent = new Date().getFullYear();
+}
+
+// Back to Top Button Visibility and Scroll
+const backToTopButton = document.getElementById('backToTop');
+
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 300) {
+    backToTopButton.classList.add('show');
+  } else {
+    backToTopButton.classList.remove('show');
+  }
+});
+
+backToTopButton.addEventListener('click', (e) => {
+  e.preventDefault();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// Interactive Developer Terminal Logic
+const terminalInput = document.getElementById('terminalInput');
+const terminalOutput = document.getElementById('terminalOutput');
+const terminalBody = document.getElementById('terminalBody');
+
+const commands = {
+  help: "Available commands:<br>&nbsp;&nbsp;<span class='highlight'>whoami</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Brief info about me<br>&nbsp;&nbsp;<span class='highlight'>skills</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- My technical stack<br>&nbsp;&nbsp;<span class='highlight'>experience</span>&nbsp;&nbsp;&nbsp;- Work history<br>&nbsp;&nbsp;<span class='highlight'>projects</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Latest works<br>&nbsp;&nbsp;<span class='highlight'>education</span>&nbsp;&nbsp;&nbsp;&nbsp;- Academic background<br>&nbsp;&nbsp;<span class='highlight'>certificates</span>&nbsp;- Certifications<br>&nbsp;&nbsp;<span class='highlight'>contact</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- How to reach me<br>&nbsp;&nbsp;<span class='highlight'>clear</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Clear terminal window",
+  whoami: "I am Muhammed Razik K M, a Web Developer specializing in React, Node.js, and Backend server management.",
+  skills: "Frontend: HTML, CSS, JavaScript, React, Bootstrap<br>Backend: Node.js, Express.js<br>Databases: MySQL, MongoDB<br>Tools: Git, SSH, Linux Servers",
+  experience: "1. Web Developer @ FinGlider (Jan '25 — Present)<br>2. Web Developer Intern @ FinGlider (May '24 — Dec '24)",
+  projects: "1. GliderGlobal Academy (LMS)<br>2. GoDigex (eCommerce WhatsApp Bot)<br>3. Kairali Restaurant System<br>4. Supermarket Management System",
+  education: "1. B Tech in IT @ College of Engineering Thalassery (2018-2022)<br>2. HSE in Biology Science @ Kkm Ghss Orkkatteri (2016-2018)",
+  certificates: "1. Foundations: Data, Data, Everywhere (Google)<br>2. AI For All – AI Appreciate (CBSE/Intel)<br>3. AI For All – AI Aware (CBSE/Intel)<br>4. Python Django/Angular Full Stack (NCTT)<br>5. Python For Beginners (Udemy)",
+  contact: "Email: muhdrazikkm@gmail.com<br>LinkedIn: linkedin.com/in/muhammed-razik-b5b266245/<br>GitHub: github.com/Muhammedrazikkm",
+  clear: "" // Handled specifically in code
+};
+
+if (terminalInput) {
+  terminalInput.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+      const command = this.value.trim().toLowerCase();
+      
+      if (command) {
+        // Echo input
+        const promptHTML = '<span class="terminal-prompt"><span class="user">razik@ubuntu</span>:<span class="path">~</span>$</span>';
+        terminalOutput.innerHTML += `<p class="terminal-text">${promptHTML} ${this.value}</p>`;
+        
+        // Process command
+        if (command === 'clear') {
+          terminalOutput.innerHTML = '';
+        } else if (commands[command]) {
+          terminalOutput.innerHTML += `<p class="terminal-text">${commands[command]}</p>`;
+        } else {
+          terminalOutput.innerHTML += `<p class="terminal-text">Command not found: ${command}. Type <span class="highlight">help</span> for a list of commands.</p>`;
+        }
+      }
+      
+      this.value = '';
+      terminalBody.scrollTop = terminalBody.scrollHeight;
+    }
+  });
+
+  // Keep focus on input when clicking terminal body
+  terminalBody.addEventListener('click', () => {
+    terminalInput.focus();
+  });
+}
+
+// Custom Cursor Trail Logic
+const cursorTrail = document.getElementById('cursorTrail');
+
+// Only enable custom cursor on non-touch devices (desktops)
+if (window.matchMedia("(pointer: fine)").matches) {
+  document.addEventListener('mousemove', (e) => {
+    cursorTrail.style.left = e.clientX + 'px';
+    cursorTrail.style.top = e.clientY + 'px';
+  });
+
+  // Enlarge cursor when hovering over clickable elements
+  const interactables = document.querySelectorAll('a, button, input, textarea, .terminal-button, .menu-toggle');
+  interactables.forEach(el => {
+    el.addEventListener('mouseenter', () => cursorTrail.classList.add('hover'));
+    el.addEventListener('mouseleave', () => cursorTrail.classList.remove('hover'));
+  });
+} else {
+  if(cursorTrail) cursorTrail.style.display = 'none'; // Hide on mobile
+}
+
+// Click to Copy Functionality
+function copyToClipboard(text, element) {
+  navigator.clipboard.writeText(text).then(() => {
+    const tooltip = element.querySelector('.copy-tooltip');
+    const originalText = tooltip.textContent;
+    
+    tooltip.textContent = 'Copied!';
+    tooltip.classList.add('copied');
+    
+    setTimeout(() => {
+      tooltip.textContent = originalText;
+      tooltip.classList.remove('copied');
+    }, 2000);
+  }).catch(err => {
+    console.error('Failed to copy: ', err);
+  });
 }

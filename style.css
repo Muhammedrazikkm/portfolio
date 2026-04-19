@@ -11,6 +11,46 @@ color: #333;
 overflow-x: hidden;
 }
 
+/* Scroll Progress Bar */
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  background: #00d2ff;
+  box-shadow: 0 0 10px rgba(0, 210, 255, 0.8);
+  width: 0%;
+  z-index: 10000;
+}
+
+/* Hide default arrow cursor on devices with a mouse */
+@media (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+}
+
+/* Custom Cursor Trail */
+.cursor-trail {
+  position: fixed;
+  width: 35px;
+  height: 35px;
+  border: 2px solid rgba(0, 210, 255, 0.6);
+  border-radius: 50%;
+  pointer-events: none; /* Allows user to click through it */
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: top 0.1s ease-out, left 0.1s ease-out, width 0.3s, height 0.3s, background 0.3s;
+  box-shadow: 0 0 10px rgba(0, 210, 255, 0.4);
+}
+
+.cursor-trail.hover {
+  width: 55px;
+  height: 55px;
+  background: rgba(0, 210, 255, 0.15);
+  border-color: rgba(0, 210, 255, 1);
+}
+
 /* Loading Animation */
 /* Loading Screen */
 .loading {
@@ -299,6 +339,89 @@ border-radius: 2px;
   text-shadow: 0 0 8px rgba(0, 210, 255, 0.5);
 }
 
+/* Terminal Section */
+.terminal-section {
+  background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+  padding: 60px 0;
+}
+
+.terminal-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: rgba(10, 15, 20, 0.95);
+  border-radius: 10px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 210, 255, 0.2);
+  border: 1px solid rgba(0, 210, 255, 0.1);
+  overflow: hidden;
+  font-family: 'Consolas', 'Courier New', monospace;
+  text-align: left;
+}
+
+.terminal-header {
+  background: #1a252f;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 210, 255, 0.1);
+}
+
+.terminal-button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.terminal-button.red { background: #ff5f56; }
+.terminal-button.yellow { background: #ffbd2e; }
+.terminal-button.green { background: #27c93f; }
+
+.terminal-title {
+  color: #888;
+  font-size: 0.9rem;
+  flex-grow: 1;
+  text-align: center;
+  padding-right: 60px; /* Offset the buttons to keep text centered */
+}
+
+.terminal-body {
+  padding: 20px;
+  height: 350px;
+  overflow-y: auto;
+  color: #fff;
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.terminal-body::-webkit-scrollbar { width: 8px; }
+.terminal-body::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.2); }
+.terminal-body::-webkit-scrollbar-thumb { background: #00d2ff; border-radius: 4px; }
+
+.terminal-text { margin-bottom: 8px; line-height: 1.5; word-wrap: break-word; }
+.terminal-text .highlight { color: #ffbd2e; font-weight: bold; }
+
+.terminal-input-container {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.terminal-prompt { margin-right: 10px; white-space: nowrap; }
+.terminal-prompt .user { color: #27c93f; font-weight: bold; }
+.terminal-prompt .path { color: #00d2ff; font-weight: bold; }
+
+#terminalInput {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 1rem;
+  flex-grow: 1;
+  outline: none;
+  min-width: 200px;
+}
 
 /* Skills Section */
 .skills-section {
@@ -433,6 +556,27 @@ border-radius: 2px;
   font-size: 1rem;
 }
 
+.experience-description ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.experience-description li {
+  padding: 0.5rem 0 0.5rem 1.5rem;
+  color: #ddd;
+  position: relative;
+  font-size: 0.95rem;
+}
+
+.experience-description li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: #00d8ff;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
 
 /* Projects Section */
 /* 🌌 Project Section Background (matches experience-section) */
@@ -708,6 +852,70 @@ border-radius: 2px;
   color: #fff;
 }
 
+.contact-info-blocks {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.contact-info-item {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 1rem 2rem;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.contact-info-item:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 5px 15px rgba(0, 210, 255, 0.2);
+}
+
+.contact-info-item i {
+  color: #00d2ff;
+  font-size: 1.2rem;
+}
+
+.copy-tooltip {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #00d2ff;
+  color: #0f2027;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  pointer-events: none;
+  box-shadow: 0 4px 10px rgba(0, 210, 255, 0.4);
+}
+
+.contact-info-item:hover .copy-tooltip {
+  opacity: 1;
+  visibility: visible;
+  top: -38px;
+}
+
+.copy-tooltip.copied {
+  background: #27c93f;
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(39, 201, 63, 0.4);
+}
+
 .contact-form {
   max-width: 600px;
   margin: 0 auto;
@@ -846,6 +1054,41 @@ transform: translateY(0);
 }
 }
 
+/* Back to Top Button */
+.back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  background: #00d2ff;
+  color: #0f2027;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  text-decoration: none;
+  box-shadow: 0 0 15px rgba(0, 210, 255, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  transform: translateY(20px);
+}
+
+.back-to-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 25px rgba(0, 210, 255, 0.8);
+  color: #0f2027;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .menu-toggle {
@@ -890,6 +1133,7 @@ transform: translateY(0);
   /* General Section Spacing */
   .section,
   .skills-section,
+  .terminal-section,
   .education-section,
   .experience-section,
   .project-section,
