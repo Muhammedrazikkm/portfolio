@@ -89,7 +89,7 @@ isValid = false;
 if (isValid) {
 // Create WhatsApp message
 const whatsappMessage = `Hi Razik! My name is ${name}. Email: ${email}. Message: ${message}`;
-const whatsappUrl = `https://wa.me/9526167587?text=${encodeURIComponent(whatsappMessage)}`;
+const whatsappUrl = `https://wa.me/97455110479?text=${encodeURIComponent(whatsappMessage)}`;
 
 // Open WhatsApp
 window.open(whatsappUrl, '_blank');
