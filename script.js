@@ -110,7 +110,7 @@ errorElement.style.display = 'block';
 }
 
   const jobTitle = document.getElementById("job-title");
-  const titles = ["Web Developer", "Backend Developer"];
+  const titles = ["Web Developer", "Backend Developer", "Full Stack Developer"];
   let index = 0;
 
   setInterval(() => {
