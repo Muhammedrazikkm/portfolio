@@ -1,277 +1,429 @@
-// Loading Screen
-window.addEventListener('load', function() {
-const loading = document.getElementById('loading');
-setTimeout(() => {
-loading.classList.add('hidden');
-}, 2000);
-});
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // --- 1. Lenis Smooth Scrolling Setup ---
+    const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        direction: 'vertical',
+        gestureDirection: 'vertical',
+        smooth: true,
+        mouseMultiplier: 1,
+        smoothTouch: false,
+        touchMultiplier: 2,
+        infinite: false,
+    });
 
-// Scroll Progress Bar
-window.addEventListener('scroll', () => {
-  const scrollProgressBar = document.getElementById('scrollProgressBar');
-  const totalScrollHeight = document.body.scrollHeight - window.innerHeight;
-  const currentScrollPosition = window.scrollY;
-  
-  const scrollPercentage = (currentScrollPosition / totalScrollHeight) * 100;
-  scrollProgressBar.style.width = scrollPercentage + '%';
-});
-
-// Smooth Scrolling
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-anchor.addEventListener('click', function (e) {
-e.preventDefault();
-const target = document.querySelector(this.getAttribute('href'));
-if (target) {
-target.scrollIntoView({
-behavior: 'smooth',
-block: 'start'
-});
-}
-});
-});
-
-// Scroll Animation
-const observerOptions = {
-threshold: 0.1,
-rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver(function(entries) {
-entries.forEach(entry => {
-if (entry.isIntersecting) {
-entry.target.classList.add('visible');
-}
-});
-}, observerOptions);
-
-document.querySelectorAll('.section').forEach(section => {
-observer.observe(section);
-});
-
-// Contact Form Validation and WhatsApp Redirect
-document.getElementById('contactForm').addEventListener('submit', function(e) {
-e.preventDefault();
-
-const name = document.getElementById('name').value.trim();
-const email = document.getElementById('email').value.trim();
-const message = document.getElementById('message').value.trim();
-
-let isValid = true;
-
-// Reset previous errors
-document.querySelectorAll('.form-group').forEach(group => {
-group.classList.remove('error');
-group.querySelector('.error-message').style.display = 'none';
-});
-
-// Validate name
-if (!name) {
-showError('name', 'Please enter your name');
-isValid = false;
-}
-
-// Validate email
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-if (!email) {
-showError('email', 'Please enter your email');
-isValid = false;
-} else if (!emailRegex.test(email)) {
-showError('email', 'Please enter a valid email');
-isValid = false;
-}
-
-// Validate message
-if (!message) {
-showError('message', 'Please enter a message');
-isValid = false;
-}
-
-if (isValid) {
-// Create WhatsApp message
-const whatsappMessage = `Hi Razik! My name is ${name}. Email: ${email}. Message: ${message}`;
-const whatsappUrl = `https://wa.me/97455110479?text=${encodeURIComponent(whatsappMessage)}`;
-
-// Open WhatsApp
-window.open(whatsappUrl, '_blank');
-
-// Reset form
-this.reset();
-}
-});
-
-function showError(fieldName, errorMessage) {
-const field = document.getElementById(fieldName);
-const formGroup = field.closest('.form-group');
-const errorElement = formGroup.querySelector('.error-message');
-
-formGroup.classList.add('error');
-errorElement.textContent = errorMessage;
-errorElement.style.display = 'block';
-}
-
-  const jobTitle = document.getElementById("job-title");
-  const titles = ["Fullstack Web Developer", "Web Developer", "Backend Developer"];
-  let index = 0;
-
-  setInterval(() => {
-    // Fade out
-    jobTitle.classList.add("fade-out");
-
-    setTimeout(() => {
-      // Change text and fade in
-      index = (index + 1) % titles.length;
-      jobTitle.textContent = titles[index];
-      jobTitle.classList.remove("fade-out");
-      jobTitle.classList.add("fade-in");
-
-      // Clean up
-      setTimeout(() => {
-        jobTitle.classList.remove("fade-in");
-      }, 500);
-    }, 500);
-  }, 4000); // Every 4 seconds
-
-
-
-// Navbar background on scroll
-// window.addEventListener('scroll', function() {
-// const nav = document.querySelector('nav');
-// if (window.scrollY > 100) {
-//  nav.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
-// } else {
-//    nav.style.background = 'transparent'; 
-// }
-// });
-
-// Mobile Menu Toggle
-const mobileMenu = document.getElementById('mobile-menu');
-const navLinks = document.querySelector('.nav-links');
-
-if (mobileMenu) {
-  mobileMenu.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    const icon = mobileMenu.querySelector('i');
-    icon.classList.toggle('fa-bars');
-    icon.classList.toggle('fa-times');
-  });
-}
-
-// Close mobile menu when clicking a link
-document.querySelectorAll('.nav-links a').forEach(link => {
-  link.addEventListener('click', () => {
-    if (navLinks.classList.contains('active')) {
-      navLinks.classList.remove('active');
-      const icon = mobileMenu.querySelector('i');
-      icon.classList.remove('fa-times');
-      icon.classList.add('fa-bars');
+    function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
     }
-  });
-});
+    requestAnimationFrame(raf);
 
-// Set dynamic copyright year
-const currentYearElement = document.getElementById('current-year');
-if (currentYearElement) {
-  currentYearElement.textContent = new Date().getFullYear();
-}
-
-// Back to Top Button Visibility and Scroll
-const backToTopButton = document.getElementById('backToTop');
-
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 300) {
-    backToTopButton.classList.add('show');
-  } else {
-    backToTopButton.classList.remove('show');
-  }
-});
-
-backToTopButton.addEventListener('click', (e) => {
-  e.preventDefault();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-
-// Interactive Developer Terminal Logic
-const terminalInput = document.getElementById('terminalInput');
-const terminalOutput = document.getElementById('terminalOutput');
-const terminalBody = document.getElementById('terminalBody');
-
-const commands = {
-  help: "Available commands:<br>&nbsp;&nbsp;<span class='highlight'>whoami</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Brief info about me<br>&nbsp;&nbsp;<span class='highlight'>skills</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- My technical stack<br>&nbsp;&nbsp;<span class='highlight'>experience</span>&nbsp;&nbsp;&nbsp;- Work history<br>&nbsp;&nbsp;<span class='highlight'>projects</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Latest works<br>&nbsp;&nbsp;<span class='highlight'>education</span>&nbsp;&nbsp;&nbsp;&nbsp;- Academic background<br>&nbsp;&nbsp;<span class='highlight'>certificates</span>&nbsp;- Certifications<br>&nbsp;&nbsp;<span class='highlight'>contact</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- How to reach me<br>&nbsp;&nbsp;<span class='highlight'>clear</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Clear terminal window",
-  whoami: "I am Muhammed Razik K M, a Web Developer specializing in React, Node.js, and Backend server management.",
-  skills: "Frontend: HTML, CSS, JavaScript, React, Bootstrap<br>Backend: Node.js, Express.js<br>Databases: MySQL, MongoDB<br>Tools: Git, SSH, Linux Servers",
-  experience: "1. Web Developer @ FinGlider (Jan '25 — Present)<br>2. Web Developer Intern @ FinGlider (May '24 — Dec '24)",
-  projects: "1. GliderGlobal Academy (LMS)<br>2. GoDigex (eCommerce WhatsApp Bot)<br>3. Kairali Restaurant System<br>4. Supermarket Management System",
-  education: "1. B Tech in IT @ College of Engineering Thalassery (2018-2022)<br>2. HSE in Biology Science @ Kkm Ghss Orkkatteri (2016-2018)",
-  certificates: "1. Foundations: Data, Data, Everywhere (Google)<br>2. AI For All – AI Appreciate (CBSE/Intel)<br>3. AI For All – AI Aware (CBSE/Intel)<br>4. Python Django/Angular Full Stack (NCTT)<br>5. Python For Beginners (Udemy)",
-  contact: "Email: muhdrazikkm@gmail.com<br>LinkedIn: linkedin.com/in/muhammed-razik-b5b266245/<br>GitHub: github.com/Muhammedrazikkm",
-  clear: "" // Handled specifically in code
-};
-
-if (terminalInput) {
-  terminalInput.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') {
-      const command = this.value.trim().toLowerCase();
-      
-      if (command) {
-        // Echo input
-        const promptHTML = '<span class="terminal-prompt"><span class="user">razik@ubuntu</span>:<span class="path">~</span>$</span>';
-        terminalOutput.innerHTML += `<p class="terminal-text">${promptHTML} ${this.value}</p>`;
+    // Integrate GSAP ScrollTrigger with Lenis
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
         
-        // Process command
-        if (command === 'clear') {
-          terminalOutput.innerHTML = '';
-        } else if (commands[command]) {
-          terminalOutput.innerHTML += `<p class="terminal-text">${commands[command]}</p>`;
-        } else {
-          terminalOutput.innerHTML += `<p class="terminal-text">Command not found: ${command}. Type <span class="highlight">help</span> for a list of commands.</p>`;
-        }
-      }
-      
-      this.value = '';
-      terminalBody.scrollTop = terminalBody.scrollHeight;
+        lenis.on('scroll', ScrollTrigger.update);
+        
+        gsap.ticker.add((time) => {
+            lenis.raf(time * 1000);
+        });
+        
+        gsap.ticker.lagSmoothing(0, 0);
+
+        // --- 2. GSAP Animations ---
+        
+        // Setup initial states for elements
+        gsap.set('.reveal-up', { y: 50, autoAlpha: 0 });
+        gsap.set('.reveal-left', { x: -50, autoAlpha: 0 });
+        gsap.set('.reveal-right', { x: 50, autoAlpha: 0 });
+        gsap.set('.reveal-scale', { scale: 0.8, autoAlpha: 0 });
+        gsap.set('.reveal-fade', { autoAlpha: 0 });
+
+        // Batch animations for better performance
+        ScrollTrigger.batch('.reveal-up', {
+            onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, autoAlpha: 1, stagger: 0.15, duration: 0.8, ease: "power3.out" }),
+            once: true
+        });
+
+        ScrollTrigger.batch('.reveal-left', {
+            onEnter: batch => gsap.to(batch, { x: 0, autoAlpha: 1, stagger: 0.15, duration: 0.8, ease: "power3.out" }),
+            once: true
+        });
+
+        ScrollTrigger.batch('.reveal-right', {
+            onEnter: batch => gsap.to(batch, { x: 0, autoAlpha: 1, stagger: 0.15, duration: 0.8, ease: "power3.out" }),
+            once: true
+        });
+
+        ScrollTrigger.batch('.reveal-scale', {
+            onEnter: batch => gsap.to(batch, { scale: 1, autoAlpha: 1, stagger: 0.15, duration: 1, ease: "back.out(1.5)" }),
+            once: true
+        });
+
+        ScrollTrigger.batch('.reveal-fade', {
+            onEnter: batch => gsap.to(batch, { autoAlpha: 1, stagger: 0.15, duration: 1, ease: "power2.out" }),
+            once: true
+        });
+        
+        // Parallax effects for blobs
+        gsap.to('.blob-1', {
+            yPercent: 30,
+            ease: "none",
+            scrollTrigger: {
+                trigger: "body",
+                start: "top top",
+                end: "bottom bottom",
+                scrub: 1
+            }
+        });
+        
+        gsap.to('.blob-2', {
+            yPercent: -50,
+            ease: "none",
+            scrollTrigger: {
+                trigger: "body",
+                start: "top top",
+                end: "bottom bottom",
+                scrub: 1.5
+            }
+        });
     }
-  });
 
-  // Keep focus on input when clicking terminal body
-  terminalBody.addEventListener('click', () => {
-    terminalInput.focus();
-  });
-}
-
-// Custom Cursor Trail Logic
-const cursorTrail = document.getElementById('cursorTrail');
-
-// Only enable custom cursor on non-touch devices (desktops)
-if (window.matchMedia("(pointer: fine)").matches) {
-  document.addEventListener('mousemove', (e) => {
-    cursorTrail.style.left = e.clientX + 'px';
-    cursorTrail.style.top = e.clientY + 'px';
-  });
-
-  // Enlarge cursor when hovering over clickable elements
-  const interactables = document.querySelectorAll('a, button, input, textarea, .terminal-button, .menu-toggle');
-  interactables.forEach(el => {
-    el.addEventListener('mouseenter', () => cursorTrail.classList.add('hover'));
-    el.addEventListener('mouseleave', () => cursorTrail.classList.remove('hover'));
-  });
-} else {
-  if(cursorTrail) cursorTrail.style.display = 'none'; // Hide on mobile
-}
-
-// Click to Copy Functionality
-function copyToClipboard(text, element) {
-  navigator.clipboard.writeText(text).then(() => {
-    const tooltip = element.querySelector('.copy-tooltip');
-    const originalText = tooltip.textContent;
+    // --- 3. Custom Cursor & Magnetic Buttons ---
+    const cursorDot = document.querySelector('.cursor-dot');
+    const cursorGlow = document.querySelector('.cursor-glow');
     
-    tooltip.textContent = 'Copied!';
-    tooltip.classList.add('copied');
-    
-    setTimeout(() => {
-      tooltip.textContent = originalText;
-      tooltip.classList.remove('copied');
-    }, 2000);
-  }).catch(err => {
-    console.error('Failed to copy: ', err);
-  });
-}
+    // Check if device has pointer (mouse)
+    if (window.matchMedia("(pointer: fine)").matches) {
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let dotX = mouseX;
+        let dotY = mouseY;
+        let glowX = mouseX;
+        let glowY = mouseY;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        // Smooth follow animation
+        const renderCursor = () => {
+            dotX += (mouseX - dotX) * 0.2;
+            dotY += (mouseY - dotY) * 0.2;
+            glowX += (mouseX - glowX) * 0.1;
+            glowY += (mouseY - glowY) * 0.1;
+
+            if (cursorDot) {
+                cursorDot.style.transform = `translate(${dotX}px, ${dotY}px)`;
+            }
+            if (cursorGlow) {
+                cursorGlow.style.transform = `translate(${glowX}px, ${glowY}px)`;
+            }
+
+            requestAnimationFrame(renderCursor);
+        };
+        requestAnimationFrame(renderCursor);
+
+        // Hover states
+        const interactables = document.querySelectorAll('a, button, input, textarea, .copy-click, .nav-link, .magnetic');
+        interactables.forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+        });
+
+        // Magnetic effect
+        const magneticElements = document.querySelectorAll('.magnetic');
+        magneticElements.forEach(el => {
+            el.addEventListener('mousemove', (e) => {
+                const rect = el.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                
+                gsap.to(el, {
+                    x: x * 0.3,
+                    y: y * 0.3,
+                    duration: 0.3,
+                    ease: "power2.out"
+                });
+            });
+            
+            el.addEventListener('mouseleave', () => {
+                gsap.to(el, {
+                    x: 0,
+                    y: 0,
+                    duration: 0.5,
+                    ease: "elastic.out(1, 0.3)"
+                });
+            });
+        });
+        
+        // Tilt effect on cards
+        const tiltElements = document.querySelectorAll('.tilt-effect');
+        tiltElements.forEach(el => {
+            el.addEventListener('mousemove', (e) => {
+                const rect = el.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = ((y - centerY) / centerY) * -10;
+                const rotateY = ((x - centerX) / centerX) * 10;
+                
+                gsap.to(el, {
+                    rotateX: rotateX,
+                    rotateY: rotateY,
+                    transformPerspective: 1000,
+                    ease: "power1.out",
+                    duration: 0.3
+                });
+            });
+            
+            el.addEventListener('mouseleave', () => {
+                gsap.to(el, {
+                    rotateX: 0,
+                    rotateY: 0,
+                    ease: "power3.out",
+                    duration: 0.5
+                });
+            });
+        });
+    } else {
+        if(cursorDot) cursorDot.style.display = 'none';
+        if(cursorGlow) cursorGlow.style.display = 'none';
+    }
+
+    // --- 4. Typewriter Effect ---
+    const typewriterElement = document.getElementById('typewriter');
+    if (typewriterElement) {
+        const roles = ["Full Stack Web Developer", "Web Developer", "Backend Developer"];
+        let roleIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typingSpeed = 100;
+
+        function type() {
+            const currentRole = roles[roleIndex];
+            
+            if (isDeleting) {
+                typewriterElement.textContent = currentRole.substring(0, charIndex - 1);
+                charIndex--;
+                typingSpeed = 50;
+            } else {
+                typewriterElement.textContent = currentRole.substring(0, charIndex + 1);
+                charIndex++;
+                typingSpeed = 100;
+            }
+
+            if (!isDeleting && charIndex === currentRole.length) {
+                isDeleting = true;
+                typingSpeed = 2000; // Pause at end
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                roleIndex = (roleIndex + 1) % roles.length;
+                typingSpeed = 500; // Pause before new word
+            }
+
+            setTimeout(type, typingSpeed);
+        }
+        
+        setTimeout(type, 1000); // Initial delay
+    }
+
+    // --- 5. Counter Animation ---
+    const counters = document.querySelectorAll('.counter');
+    if (counters.length > 0 && typeof ScrollTrigger !== 'undefined') {
+        counters.forEach(counter => {
+            const target = +counter.getAttribute('data-target');
+            
+            ScrollTrigger.create({
+                trigger: counter,
+                start: "top 85%",
+                once: true,
+                onEnter: () => {
+                    gsap.to(counter, {
+                        innerHTML: target,
+                        duration: 2,
+                        snap: { innerHTML: 1 },
+                        ease: "power2.out"
+                    });
+                }
+            });
+        });
+    }
+
+    // --- 6. Project Filtering ---
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    if (filterBtns.length > 0) {
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active state
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filterValue = btn.getAttribute('data-filter');
+
+                // Filter logic
+                projectCards.forEach(card => {
+                    const categories = card.getAttribute('data-category');
+                    
+                    if (filterValue === 'all' || categories.includes(filterValue)) {
+                        gsap.to(card, { autoAlpha: 1, scale: 1, display: 'flex', duration: 0.4 });
+                    } else {
+                        gsap.to(card, { autoAlpha: 0, scale: 0.8, display: 'none', duration: 0.4 });
+                    }
+                });
+                
+                // Refresh ScrollTrigger since layout changed
+                setTimeout(() => ScrollTrigger.refresh(), 450);
+            });
+        });
+    }
+
+    // --- 7. Button Ripple Effect ---
+    const rippleButtons = document.querySelectorAll('.ripple');
+    rippleButtons.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            let x = e.clientX - e.target.getBoundingClientRect().left;
+            let y = e.clientY - e.target.getBoundingClientRect().top;
+            
+            let ripple = document.createElement('span');
+            ripple.classList.add('ripple-span');
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            
+            this.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        });
+    });
+
+    // --- 8. Navigation & Scroll ---
+    const navbar = document.getElementById('navbar');
+    const scrollProgress = document.getElementById('scrollProgress');
+    const backToTop = document.querySelector('.back-to-top');
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-links .nav-link');
+
+    window.addEventListener('scroll', () => {
+        // Navbar Scrolled State
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+
+        // Scroll Progress Bar
+        const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = (window.scrollY / totalHeight) * 100;
+        if(scrollProgress) scrollProgress.style.width = `${progress}%`;
+
+        // Back to top button
+        if (window.scrollY > 500) {
+            backToTop.classList.add('show');
+        } else {
+            backToTop.classList.remove('show');
+        }
+
+        // Active Nav Link based on scroll
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (scrollY >= (sectionTop - 200)) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${current}`) {
+                link.classList.add('active');
+            }
+        });
+    });
+
+    // Smooth scroll for nav links (Lenis handles the smooth, we just need to update URL/State)
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const target = document.querySelector(targetId);
+            
+            if (target) {
+                lenis.scrollTo(target, { offset: -80 });
+                
+                // Close mobile menu if open
+                if (navMenu.classList.contains('active')) {
+                    mobileToggle.click();
+                }
+            }
+        });
+    });
+
+    // --- 9. Mobile Menu ---
+    const mobileToggle = document.getElementById('mobileToggle');
+    const navMenu = document.getElementById('navMenu');
+
+    if (mobileToggle) {
+        mobileToggle.addEventListener('click', () => {
+            mobileToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+        });
+    }
+
+    // --- 10. Copy to Clipboard ---
+    const copyElements = document.querySelectorAll('.copy-click');
+    copyElements.forEach(el => {
+        el.addEventListener('click', () => {
+            const textToCopy = el.getAttribute('data-copy');
+            const tooltip = el.querySelector('.copy-tooltip');
+            
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                const originalText = tooltip.innerText;
+                tooltip.innerText = 'Copied!';
+                tooltip.style.color = 'var(--accent-color)';
+                
+                setTimeout(() => {
+                    tooltip.innerText = originalText;
+                    tooltip.style.color = '';
+                }, 2000);
+            });
+        });
+    });
+
+    // --- 11. Contact Form & WhatsApp ---
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+            
+            if (name && email && message) {
+                const whatsappMsg = `Hi Razik! My name is ${name}. Email: ${email}. Message: ${message}`;
+                const whatsappUrl = `https://wa.me/97455110479?text=${encodeURIComponent(whatsappMsg)}`;
+                window.open(whatsappUrl, '_blank');
+                contactForm.reset();
+            }
+        });
+    }
+
+    // --- 12. Set Current Year in Footer ---
+    const yearSpan = document.getElementById('year');
+    if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
+    }
+});
