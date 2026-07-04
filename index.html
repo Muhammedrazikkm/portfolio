@@ -47,11 +47,16 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-content">
-            <h1>Muhammed Razik K M</h1>
-           <p><span id="job-title">Web Developer</span></p>
-           <a href="./assets/Muhdrazikkm_resume.pdf" class="btn" download target="_blank">
-  Download My CV
-</a>
+            <div class="hero-text">
+                <h1>Muhammed Razik K M</h1>
+                <p><span id="job-title">Fullstack Web Developer</span></p>
+                <a href="./assets/FULL STACK WEB DEVELOPER.pdf" class="btn" download target="_blank">
+                  Download My CV
+                </a>
+            </div>
+            <div class="profile-img-container">
+                <img src="./assets/PRO.png" alt="Muhammed Razik K M" class="profile-img">
+            </div>
         </div>
     </section>
 
@@ -60,7 +65,7 @@
         <div class="container">
             <h2 class="section-title">About Me</h2>
             <div class="about-content">
-                <p>Passionate Web Developer with experience building scalable, high-performance applications using React, Node.js, Express.js, MySQL, and MongoDB. I specialize in responsive UI development, RESTful API design, secure authentication, database optimization, and Linux server management. I deliver production-ready systems with reliable deployments, SSH administration, and robust backend architecture.</p>
+                <p>Full Stack Web Developer with 2+ years of experience building and deploying production-grade systems — including a multi-tenant restaurant platform live across 3 clients and an LMS serving 150+ active users. Skilled in React.js, Node.js, Express.js, MySQL, and MongoDB, with hands-on expertise in RESTful APIs, JWT authentication, WebSockets, and RBAC. Delivers end-to-end — from frontend development and backend architecture to Linux server deployment and infrastructure management.</p>
             </div>
         </div>
     </section>
@@ -143,17 +148,44 @@
             <div class="experience-item">
                 <div class="experience-header">
                     <div class="company-info">
-                        <h3>Web Developer</h3>
-                        <p>FinGlider - Bangalore</p>
+                        <h3>Full Stack Web Developer</h3>
+                        <p>FinGlider Solutions LLP - Bangalore, India</p>
                     </div>
-                    <div class="experience-period">Jan '25 — Present</div>
+                    <div class="experience-period">Jan '25 — Jun '26</div>
                 </div>
                 <div class="experience-description">
+                    <p style="margin-bottom: 15px;">Deployed and maintained 3 production web applications on Linux servers, managing the full infrastructure stack including SSH access, PM2 process management, Nginx reverse proxy, domain/DNS configuration, subdomain setup, and SSL certificate installation</p>
+                    <strong style="display: block; margin-bottom: 10px; color: var(--primary-color);">Restaurant Management System:</strong>
                     <ul>
-                        <li><strong>GliderGlobal Academy:</strong> Developed a multi-role Learning Management System with Admin, Instructor, and Student dashboards, using Node.js, Express.js, and MySQL for scalable data workflows.</li>
-                        <li><strong>Kairali Restaurant System:</strong> Built a full-stack restaurant application with table reservations, QR ordering, customer feedback, and secure backend APIs to streamline daily operations.</li>
-                        <li><strong>Supermarket Management System:</strong> Implemented batch-wise inventory control, dynamic product pages, and optimized database logic for faster, more reliable store operations.</li>
-                        <li><strong>Server & Deployment Management:</strong> Managed Linux servers via SSH, configured production environments and subdomains, and deployed stable builds for live applications.</li>
+                        <li>Developed and deployed a full-stack restaurant management system across 3 live restaurant clients, supporting 5+ order modes including dine-in, QR-based, online, takeaway, and delivery</li>
+                        <li>Built multi-tenant architecture serving 3 separate restaurant businesses from a single codebase, with per-client region, language, and AMC configuration</li>
+                        <li>Integrated WebSocket for real-time order notifications and customer feedback capture, enabling kitchen and admin dashboards to receive orders instantly without page refresh</li>
+                        <li>Developed a dedicated takeaway screen for efficient order processing</li>
+                        <li>Built secure RESTful APIs and optimized database workflows for scalability and performance</li>
+                        <li>Implemented table management (visual layout), reservations, and digital ordering (KOT) with live billing</li>
+                        <li>Implemented JWT-based authentication and role-based access control (RBAC) to secure API endpoints and manage multi-user access across the system</li>
+                        <li>Developed product and category management with Excel bulk upload functionality</li>
+                        <li>Implemented time-based menu display with configurable product availability across different time slots (Morning, Afternoon, Evening, and Night)</li>
+                        <li>Implemented table-specific QR code generation, enabling customers to scan a QR code at their table and place orders directly through the QR-based ordering system</li>
+                        <li>Implemented internationalization (i18n) supporting multiple languages (e.g., English, Arabic) with dynamic language switching and full RTL/LTR layout adaptation</li>
+                        <li><strong>Tech Stack:</strong> React.js, Node.js, Express.js, MongoDB</li>
+                    </ul>
+                    <strong style="display: block; margin-top: 15px; margin-bottom: 10px; color: var(--primary-color);">Supermarket Management System:</strong>
+                    <ul>
+                        <li>Contributed to a scalable supermarket management system tested with 500+ products, covering inventory control, stock tracking, and end-to-end customer ordering</li>
+                        <li>Built batch-wise inventory management with expiry tracking, preventing stock overrun and expired product visibility in the storefront</li>
+                        <li>Developed dynamic product pages with multi-image display, variant selection, and zoom functionality, improving product browsing experience across devices</li>
+                        <li>Optimized backend queries and data models for 500+ product catalog, improving response performance for high-volume inventory and order operations</li>
+                        <li>Built a two-way customer feedback system and automated order tracking — capturing feedback via online orders and admin-triggered email forms, with tracking links sent automatically upon order acceptance</li>
+                        <li><strong>Tech Stack:</strong> React.js, Node.js, Express.js, MongoDB</li>
+                    </ul>
+                    <strong style="display: block; margin-top: 15px; margin-bottom: 10px; color: var(--primary-color);">Learning Management System (LMS):</strong>
+                    <ul>
+                        <li>Developed and deployed a multi-role LMS serving 150+ active users including 100+ students and 50+ instructors in a live production environment</li>
+                        <li>Built comprehensive course management system covering courses, syllabus, study materials, and role-based quiz creation with automated result pages showing answers and correct responses</li>
+                        <li>Designed RBAC controlling access across Admin, Instructor, and Student roles, ensuring secure and isolated access for each user type in a shared production system</li>
+                        <li>Designed fully responsive UI ensuring consistent experience across desktop, tablet, and mobile devices for a production-facing student and instructor platform</li>
+                        <li><strong>Tech Stack:</strong> JavaScript, Node.js, Express.js, MySQL</li>
                     </ul>
                 </div>
             </div>
@@ -162,14 +194,17 @@
                 <div class="experience-header">
                     <div class="company-info">
                         <h3>Web Developer Intern</h3>
-                        <p>FinGlider - Bangalore</p>
+                        <p>FinGlider Solutions LLP - Bangalore, India</p>
                     </div>
                     <div class="experience-period">May '24 — Dec '24</div>
                 </div>
                 <div class="experience-description">
                     <ul>
-                        <li>Built and maintained scalable backend systems using Node.js and Express.js, designing RESTful APIs and connecting them with dynamic HTML, CSS, and JavaScript frontends.</li>
-                        <li>Optimized MySQL database interactions, enforced version control with Git, and supported collaborative workflows across the development team.</li>
+                        <li>Contributed to initial system architecture and designed MySQL database schemas from scratch covering course, user, quiz, and study material modules</li>
+                        <li>Developed and integrated backend APIs for core LMS features including course management, quiz creation, and study material handling</li>
+                        <li>Expanded scope mid-internship from backend to full-stack, independently building responsive frontend components using HTML, CSS, and JavaScript</li>
+                        <li>Implemented role-based access control (RBAC) for Admin, Instructor, and Student roles, ensuring secure and isolated access across the platform</li>
+                        <li>Managed codebase using Git within an Agile team, contributing through feature branching, pull requests, and code review workflows</li>
                     </ul>
                 </div>
             </div>
@@ -297,6 +332,15 @@
         <div class="container">
             <h2 class="section-title">Certifications</h2>
             <div class="certificates-grid">
+                <div class="certificate-card">
+                    <div class="certificate-icon"><i class="fas fa-certificate"></i></div>
+                    <h3>Google AI</h3>
+                    <p><strong>Given by:</strong> Google</p>
+                    <p><strong>Period:</strong> June 2026</p>
+                    <a href="https://www.coursera.org/account/accomplishments/specialization/B4FUSAB44D22" class="certificate-link" target="_blank" rel="noopener noreferrer">
+          View 
+        </a>
+                </div>
                 <div class="certificate-card">
                     <div class="certificate-icon"><i class="fas fa-certificate"></i></div>
                     <h3>Foundations: Data, Data, Everywhere</h3>
